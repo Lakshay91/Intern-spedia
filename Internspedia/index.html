@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: rgb(0, 0, 0);">Registration Form</h1><br><br>
+        <form name='registration' onsubmit="return formValidation();">
+        <ul>
+            <li><label for="userid">User ID:</label></li>
+            <li><input type="text" id="userid" size="12"></li>
+            <li><label for="passid">Password:</label></li>
+            <li><input type="password" id="passid" size="10"></li>
+            <li><label for="name">User Name:</label></li>
+            <li><input type="text" id="name" size="25"></li>
+            <li><label for="profession">Profession:</label></li>
+            <li><select id="profession">
+                <option selected="" value="Default">(Please Select your Profession)</option>
+                <option value="ST">Student</option>
+                <option value="PF">Professor</option>
+                <option value="OT">Others</option>
+            </select></li>
+            <li><label for="address">Address:</label></li>
+            <li><input type="text" id="address" size="25"></li>
+            <li><label for="country">Country:</label></li>
+            <li><select id="country">
+                <option selected="" value="Default">(Please Select a Country)</option>
+                <option value="AF">Australia</option>
+                <option value="IN">India</option>
+                <option value="RU">Russia</option>
+            </select></li>
+            <li><label for="pin">PIN Code:</label></li>
+            <li><input type="text" id="pin" size="12"></li>
+            <li><label for="email">Email ID:</label></li>
+            <li><input type="email" id="email" size="25"></li>
+            <li><label for="gender">Gender:</label></li>
+            <li><input type="radio" id="male" value="Male"><span>Male</span></li>
+            <li><input type="radio" id="female" value="Female"><span>Female</span></li>
+            <li><label for="language">Language:</label></li>
+            <li><input type="checkbox" id="en" checked><span>English</span></li>
+            <li><input type="checkbox" id="hi" checked><span>Hindi</span></li>
+            <li><input type="checkbox" id="ote" checked><span>Others</span></li>
+            <li><input type="submit" name="submit" values=""submit></li>
+        </ul></form>
+    </div>
+    <script>
+        function formValidation(){
+            var uid=document.getElementById("userid");
+            var pid=document.getElementById("passid");
+            var uname=document.getElementById("name");
+            var uprofession=document.getElementById("profession");
+            var uadd=document.getElementById("address");
+            var ucountry=document.getElementById("country");
+            var upin=document.getElementById("pin");
+            var uemail=document.getElementById("email");
+            var usex=document.getElementById("male");
+            var usex=document.getElementById("female");
+            if (userid_validation(uid,5,12)){
+                if(passid_validation(pid,7,12)){
+                    if(name_validation(uname)){
+                        if(proff_validation(uprofession)){
+                            if(address_validation(uadd)){
+                               if(country_validation(ucountry)){
+                                 if(pin_validation(upin)){
+                                    if(email_validation(uemail)){
+                                        if(sex_validation(male,female)){}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+         }
+            return false;
+        }
+        function userid_validation(uid,mx,my){
+            var uid_len=uid.value.length;
+            if(uid_len==0||uid_len>=my||uid_len<=mx){
+                alert("User id should not be empty/length be between" +mx+ "to" +my);
+                uid.focus();
+                return false;
+            }
+            else{
+            return true;
+            }
+        }
+        function passid_validation(pid,mx,my){
+            var pid_len=pid.value.length;
+            if(pid_len==0||pid_len>=my||pid_len<mx){
+                alert("Password should not be empty/ length be between" +mx+ "to" +my);
+                pid.focus()
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        function name_validation(uname){
+            var letters=/^[a-zA-Z\-]+$/;
+            if(uname.value.match(letters)){
+                return true;
+            }
+            else{
+                alert("Username must have alphabetic characters only");
+                uname.focus();
+                return false;
+            }
+        }
+        function proff_validation(uprofession){
+            if(uprofession.value=="Default"){
+                alert("Select your profession from the list");
+                uprofession.focus();
+                return false;
+            }
+            else 
+            {
+                return true;
+            }
+        }
+        function address_validation(uadd){
+            var letters=/^[a-zA-Z\-]+$/;
+            if(uadd.value.match(letters)){
+                return true;
+            }
+            else{
+                alert("User address must have alphabetic characters only");
+                uadd.focus();
+                return false;
+            }
+        }
+        function country_validation(ucountry){
+            if(ucountry.value=="Default"){
+                alert("Select your country from the list");
+                ucountry.focus();
+                return false;
+            }
+            else 
+            {
+                return true;
+            }
+        }
+        function pin_validation(upin){
+            var numbers=/^[0-9\-]+$/;
+            if(upin.value.match(numbers)){
+                return true;
+            }
+            else{
+                alert("PIN Code must have numeric characters only");
+                upin.focus();
+                return false;
+            }
+        }
+        function email_validation(uemail){
+            var mailformat=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if(uemail.value.match(mailformat)){
+                return true;
+            }
+            else{
+                alert("You have entered an invalid email address");
+                uemail.focus();
+                return false;
+            }
+        }
+        function sex_validation(male,female){
+            x=0;
+            if(male.checked){
+                x++;
+            }
+            if(female.checked){
+                x++;
+            }
+            if(x==0){
+                alert("Select Male/Female");
+                male.focus();
+                return false;
+            }
+            else{
+                alter("Form Successfully Submitted");
+                window.location.reload()
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>
